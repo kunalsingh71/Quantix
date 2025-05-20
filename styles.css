@@ -989,6 +989,12 @@ th {
 tr:nth-child(even) {
     background-color: var(--btn-special-bg-color);
 }
+.mobile-history-visible .calculation-history {
+    height: auto;
+    max-height: 64px; /* Enough for 2 entries when expanded */
+    white-space: normal;
+    overflow-y: auto;
+}
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 480px) {
@@ -1002,9 +1008,15 @@ tr:nth-child(even) {
         height: calc(100vh - 20px);
         border-radius: var(--radius-medium);
     }
+    .calculation-history {
+        min-height: 32px; /* Reduced height for mobile */
+        height: 32px;
+        font-size: 0.75rem; /* Smaller font */
+    }
+
     
     .calculator-main-content {
-        padding: 15px;
+        padding: 12px 15px; 
         min-height: 400px;
     }
     
@@ -1042,7 +1054,9 @@ tr:nth-child(even) {
     .current-input {
         font-size: 2rem;
     }
-    
+     .keypad-area {
+        margin-top: 8px; /* Reduced margin */
+    }
     .keypad-btn {
         font-size: 1rem;
         min-height: 38px;
@@ -1086,14 +1100,18 @@ tr:nth-child(even) {
     .mode-tab span {
         display: none;
     }
-    
+     .calculation-history {
+        min-height: 28px;
+        height: 28px;
+        font-size: 0.7rem;
+    }
     .keypad-btn {
         font-size: 0.9rem;
         min-height: 36px;
     }
     
     .current-input {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
     }
     
     .financial-content-area, .converter-content-area {
