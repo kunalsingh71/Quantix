@@ -237,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateHistoryDisplay(entry = null) {
         if (entry) {
             historyArr.push(entry);
-            if (historyArr.length > 10) historyArr.shift();
+            if (historyArr.length > 2) historyArr.shift();
         }
         historyDisplay.innerHTML = historyArr.join('<br>');
         historyDisplay.scrollTop = historyDisplay.scrollHeight;
@@ -372,10 +372,14 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // History
         const savedHistory = localStorage.getItem('calculatorHistory');
-        if (savedHistory) {
-            historyArr = JSON.parse(savedHistory);
-            updateHistoryDisplay();
-        }
+if (savedHistory) {
+    historyArr = JSON.parse(savedHistory);
+    // Only keep the last 2 items if more exist
+    if (historyArr.length > 2) {
+        historyArr = historyArr.slice(-2);
+    }
+    updateHistoryDisplay();
+}
         
         const savedConvHistory = localStorage.getItem('conversionHistory');
         if (savedConvHistory) {
