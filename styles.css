@@ -337,13 +337,15 @@ body {
 .calculation-history {
     font-size: 0.85rem;
     color: var(--text-secondary-color);
-    min-height: 18px;
+    min-height: 36px; /* Enough for 2 lines */
+    height: 36px; /* Fixed height for 2 lines */
     margin-bottom: 8px;
     overflow-x: auto;
     white-space: nowrap;
     direction: rtl;
     scrollbar-width: none;
 }
+
 
 .calculation-history::-webkit-scrollbar { 
     display: none;
