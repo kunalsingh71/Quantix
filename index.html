@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantix</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <header class="app-header">
+            <div class="header-top">
+                <div class="app-brand">
+                    <i class="fas fa-calculator brand-icon"></i>
+                    <h1>Quantix</h1>
+                </div>
+                <div class="app-controls">
+                    <button class="control-btn" id="history-toggle" title="History">
+                        <i class="fas fa-history"></i>
+                    </button>
+                    <button class="control-btn" id="theme-toggle" title="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="control-btn" id="settings-btn" title="Settings">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+            </div>
+            <nav class="mode-switcher">
+                <div class="slider-track">
+                    <button class="mode-tab active" data-mode="calculator">
+                        <i class="fas fa-calculator"></i> <span>Calculator</span>
+                    </button>
+                    <button class="mode-tab" data-mode="financial">
+                        <i class="fas fa-chart-line"></i> <span>Financial</span>
+                    </button>
+                    <button class="mode-tab" data-mode="converter">
+                        <i class="fas fa-exchange-alt"></i> <span>Converter</span>
+                    </button>
+                    <div class="slider-indicator"></div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="calculator-main-content">
+            <!-- Calculator Panel -->
+            <div class="main-panel calculator-panel active" data-panel="calculator">
+                <div class="panel-header">
+                    <div class="sub-mode-selector">
+                        <button class="sub-mode-btn active" data-sub-mode="standard">Standard</button>
+                        <button class="sub-mode-btn" data-sub-mode="scientific">Scientific</button>
+                      
+                    </div>
+                </div>
+                
+                <div class="display-container">
+                    <div class="memory-indicator" id="memory-indicator">
+                        <i class="fas fa-memory"></i> M
+                    </div>
+                    <div class="calculation-display">
+                        <div class="calculation-history" id="history"></div>
+                        <div class="current-input" id="display">0</div>
+                    </div>
+                </div>
+
+                <div class="keypad-area">
+                    <!-- Standard Mode Keypad -->
+                    <div class="keypad-container standard-mode active">
+                        <button class="keypad-btn function-btn" data-value="AC">AC</button>
+                        <button class="keypad-btn function-btn" data-value="±">+/-</button>
+                        <button class="keypad-btn function-btn" data-value="%">%</button>
+                        <button class="keypad-btn operation-btn" data-value="/">÷</button>
+
+                        <button class="keypad-btn number-btn" data-value="7">7</button>
+                        <button class="keypad-btn number-btn" data-value="8">8</button>
+                        <button class="keypad-btn number-btn" data-value="9">9</button>
+                        <button class="keypad-btn operation-btn" data-value="*">×</button>
+
+                        <button class="keypad-btn number-btn" data-value="4">4</button>
+                        <button class="keypad-btn number-btn" data-value="5">5</button>
+                        <button class="keypad-btn number-btn" data-value="6">6</button>
+                        <button class="keypad-btn operation-btn" data-value="-">−</button>
+
+                        <button class="keypad-btn number-btn" data-value="1">1</button>
+                        <button class="keypad-btn number-btn" data-value="2">2</button>
+                        <button class="keypad-btn number-btn" data-value="3">3</button>
+                        <button class="keypad-btn operation-btn" data-value="+">+</button>
+
+                        <button class="keypad-btn number-btn zero-btn" data-value="0">0</button>
+                        <button class="keypad-btn number-btn" data-value=".">.</button>
+                        <button class="keypad-btn equals-btn" data-value="=">=</button>
+                    </div>
+
+                    <!-- Scientific Mode Keypad -->
+                    <div class="keypad-container scientific-mode">
+                        <!-- Row 1 -->
+                        <button class="keypad-btn sci-btn" data-value="sin">sin</button>
+                        <button class="keypad-btn sci-btn" data-value="cos">cos</button>
+                        <button class="keypad-btn sci-btn" data-value="tan">tan</button>
+                        <button class="keypad-btn sci-btn" data-value="√">√</button>
+                        <button class="keypad-btn function-btn" data-value="AC">AC</button>
+                        
+                        <!-- Row 2 -->
+                        <button class="keypad-btn sci-btn" data-value="asin">sin⁻¹</button>
+                        <button class="keypad-btn sci-btn" data-value="acos">cos⁻¹</button>
+                        <button class="keypad-btn sci-btn" data-value="atan">tan⁻¹</button>
+                        <button class="keypad-btn sci-btn" data-value="^">x<sup>y</sup></button>
+                        <button class="keypad-btn function-btn" data-value="±">+/-</button>
+
+                        <!-- Row 3 -->
+                        <button class="keypad-btn sci-btn" data-value="log">log</button>
+                        <button class="keypad-btn sci-btn" data-value="ln">ln</button>
+                        <button class="keypad-btn sci-btn" data-value="e">e</button>
+                        <button class="keypad-btn sci-btn" data-value="π">π</button>
+                        <button class="keypad-btn function-btn" data-value="%">%</button>
+
+                        <!-- Row 4 -->
+                        <button class="keypad-btn sci-btn" data-value="10^x">10<sup>x</sup></button>
+                        <button class="keypad-btn sci-btn" data-value="e^x">e<sup>x</sup></button>
+                        <button class="keypad-btn sci-btn" data-value="!">x!</button>
+                        <button class="keypad-btn function-btn" data-value="(">(</button>
+                        <button class="keypad-btn function-btn" data-value=")">)</button>
+
+                        <!-- Row 5 -->
+                        <button class="keypad-btn number-btn" data-value="7">7</button>
+                        <button class="keypad-btn number-btn" data-value="8">8</button>
+                        <button class="keypad-btn number-btn" data-value="9">9</button>
+                        <button class="keypad-btn operation-btn" data-value="/">÷</button>
+                        <button class="keypad-btn sci-btn" data-value="DEG">DEG</button>
+
+                        <!-- Row 6 -->
+                        <button class="keypad-btn number-btn" data-value="4">4</button>
+                        <button class="keypad-btn number-btn" data-value="5">5</button>
+                        <button class="keypad-btn number-btn" data-value="6">6</button>
+                        <button class="keypad-btn operation-btn" data-value="*">×</button>
+                        <button class="keypad-btn sci-btn" data-value="RAD">RAD</button>
+
+                        <!-- Row 7 -->
+                        <button class="keypad-btn number-btn" data-value="1">1</button>
+                        <button class="keypad-btn number-btn" data-value="2">2</button>
+                        <button class="keypad-btn number-btn" data-value="3">3</button>
+                        <button class="keypad-btn operation-btn" data-value="-">−</button>
+                        <button class="keypad-btn sci-btn" data-value="GRAD">GRAD</button>
+
+                        <!-- Row 8 -->
+                        <button class="keypad-btn number-btn zero-btn" data-value="0">0</button>
+                        <button class="keypad-btn number-btn" data-value=".">.</button>
+                        <button class="keypad-btn operation-btn" data-value="+">+</button>
+                        <button class="keypad-btn equals-btn" data-value="=">=</button>
+                        <button class="keypad-btn sci-btn" data-value="rand">Rand</button>
+                    </div>
+
+                    <!-- Programmer Mode Keypad -->
+                    <div class="keypad-container programmer-mode">
+                        <!-- Programmer mode buttons would go here -->
+                        <!-- Hex, Dec, Oct, Bin buttons and corresponding digits -->
+                    </div>
+                </div>
+
+               
+            </div>
+
+            <!-- Financial Panel -->
+            <div class="main-panel financial-panel" data-panel="financial">
+                <div class="panel-header">
+                    <div class="panel-title">Financial Tools</div>
+                    <div class="sub-mode-selector">
+                        <button class="sub-mode-btn active" data-sub-mode="tvm">TVM</button>
+                        <button class="sub-mode-btn" data-sub-mode="loans">Loans</button>
+                        <button class="sub-mode-btn" data-sub-mode="investments">Invest</button>
+                        <button class="sub-mode-btn" data-sub-mode="currency">Currency</button>
+                    </div>
+                </div>
+
+                <div class="financial-content-area">
+                    <!-- TVM Calculator -->
+                    <div class="financial-content tvm-tab active">
+                        <h3>Time Value of Money</h3>
+                        <div class="input-group">
+                            <label for="pv">Present Value (PV)</label>
+                            <input type="number" id="pv" placeholder="e.g., 1000">
+                        </div>
+                        <div class="input-group">
+                            <label for="fv">Future Value (FV)</label>
+                            <input type="number" id="fv" placeholder="e.g., 1200">
+                        </div>
+                        <div class="input-group">
+                            <label for="pmt">Payment (PMT)</label>
+                            <input type="number" id="pmt" placeholder="e.g., 50">
+                        </div>
+                        <div class="input-group">
+                            <label for="rate">Interest Rate (% per period)</label>
+                            <input type="number" id="rate" placeholder="e.g., 5">
+                        </div>
+                        <div class="input-group">
+                            <label for="periods">Periods (N)</label>
+                            <input type="number" id="periods" placeholder="e.g., 12">
+                        </div>
+                        <div class="input-group">
+                            <label for="payment-type">Payment Type</label>
+                            <select id="payment-type">
+                                <option value="end">End of Period</option>
+                                <option value="beginning">Beginning of Period</option>
+                            </select>
+                        </div>
+                        <button class="action-btn" id="calculate-tvm">Calculate</button>
+                        <div class="financial-result" id="tvm-result"></div>
+                    </div>
+
+                    <!-- Loan Calculator -->
+                    <div class="financial-content loans-tab">
+                        <h3>Loan Calculator</h3>
+                        <div class="input-group">
+                            <label for="loan-amount">Loan Amount ($)</label>
+                            <input type="number" id="loan-amount" placeholder="e.g., 20000">
+                        </div>
+                        <div class="input-group">
+                            <label for="loan-rate">Annual Interest Rate (%)</label>
+                            <input type="number" id="loan-rate" placeholder="e.g., 7.5" step="0.01">
+                        </div>
+                        <div class="input-group">
+                            <label for="loan-term">Loan Term (years)</label>
+                            <input type="number" id="loan-term" placeholder="e.g., 5">
+                        </div>
+                        <div class="input-group">
+                            <label for="loan-payments">Payments per Year</label>
+                            <select id="loan-payments">
+                                <option value="12">Monthly (12)</option>
+                                <option value="26">Bi-weekly (26)</option>
+                                <option value="52">Weekly (52)</option>
+                            </select>
+                        </div>
+                        <button class="action-btn" id="calculate-loan">Calculate</button>
+                        <div class="financial-result-group">
+                            <div class="financial-result" id="loan-emi-result">Monthly Payment: -</div>
+                            <div class="financial-result" id="loan-total-payable-result">Total Payable: -</div>
+                            <div class="financial-result" id="loan-total-interest-result">Total Interest: -</div>
+                            <div class="financial-result" id="loan-amortization">Amortization: <button class="mini-btn" id="show-amortization">Show</button></div>
+                        </div>
+                    </div>
+
+                    <!-- Investment Calculator -->
+                    <div class="financial-content investments-tab">
+                        <h3>Investment Growth</h3>
+                        <div class="input-group">
+                            <label for="inv-initial">Initial Investment ($)</label>
+                            <input type="number" id="inv-initial" placeholder="e.g., 5000">
+                        </div>
+                        <div class="input-group">
+                            <label for="inv-contribution">Periodic Contribution ($)</label>
+                            <input type="number" id="inv-contribution" placeholder="e.g., 100 (optional)">
+                        </div>
+                        <div class="input-group">
+                            <label for="inv-rate">Annual Return Rate (%)</label>
+                            <input type="number" id="inv-rate" placeholder="e.g., 8" step="0.01">
+                        </div>
+                        <div class="input-group">
+                            <label for="inv-years">Years to Grow</label>
+                            <input type="number" id="inv-years" placeholder="e.g., 10">
+                        </div>
+                        <div class="input-group">
+                            <label for="inv-compounding">Compounding Frequency</label>
+                            <select id="inv-compounding">
+                                <option value="1">Annually</option>
+                                <option value="2">Semi-annually</option>
+                                <option value="4">Quarterly</option>
+                                <option value="12" selected>Monthly</option>
+                                <option value="365">Daily</option>
+                            </select>
+                        </div>
+                        <button class="action-btn" id="calculate-investment">Calculate</button>
+                        <div class="financial-result-group">
+                            <div class="financial-result" id="inv-result">Future Value: -</div>
+                            <div class="financial-result" id="inv-contributions-result">Total Contributions: -</div>
+                            <div class="financial-result" id="inv-interest-result">Interest Earned: -</div>
+                            <div class="financial-result" id="inv-growth-chart">Growth Chart: <button class="mini-btn" id="show-growth-chart">Show</button></div>
+                        </div>
+                    </div>
+
+                    <!-- Currency Converter -->
+                    <div class="financial-content currency-tab">
+                        <h3>Currency Converter</h3>
+                        <div class="input-group">
+                            <label for="currency-amount">Amount</label>
+                            <input type="number" id="currency-amount" placeholder="e.g., 100">
+                        </div>
+                        <div class="converter-interface">
+                            <div class="converter-side">
+                                <select id="from-currency">
+                                    <option value="USD">US Dollar (USD)</option>
+                                    <option value="EUR">Euro (EUR)</option>
+                                    <option value="GBP">British Pound (GBP)</option>
+                                    <option value="JPY">Japanese Yen (JPY)</option>
+                                    <option value="CAD">Canadian Dollar (CAD)</option>
+                                </select>
+                            </div>
+                            <div class="converter-equals">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                            <div class="converter-side">
+                                <select id="to-currency">
+                                    <option value="EUR">Euro (EUR)</option>
+                                    <option value="USD" selected>US Dollar (USD)</option>
+                                    <option value="GBP">British Pound (GBP)</option>
+                                    <option value="JPY">Japanese Yen (JPY)</option>
+                                    <option value="CAD">Canadian Dollar (CAD)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="currency-date">Exchange Rate Date</label>
+                            <input type="date" id="currency-date">
+                        </div>
+                        <button class="action-btn" id="convert-currency">Convert</button>
+                        <div class="financial-result" id="currency-result">Result: -</div>
+                        <div class="financial-result" id="currency-rate">Exchange Rate: -</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit Converter Panel -->
+            <div class="main-panel converter-panel" data-panel="converter">
+                <div class="panel-header">
+                    <div class="panel-title">Unit Converter</div>
+                    <div class="sub-mode-selector">
+                        
+                        <button class="sub-mode-btn" data-sub-mode="all">All Units</button>
+                    </div>
+                </div>
+                <div class="converter-content-area">
+                    <div class="input-group">
+                        <label for="converter-category">Category</label>
+                        <select id="converter-category">
+                            <option value="length">Length</option>
+                            <option value="weight">Weight/Mass</option>
+                            <option value="temperature">Temperature</option>
+                            <option value="volume">Volume</option>
+                            <option value="area">Area</option>
+                            <option value="speed">Speed</option>
+                            <option value="time">Time</option>
+                            <option value="data">Data</option>
+                            <option value="pressure">Pressure</option>
+                            <option value="energy">Energy</option>
+                        </select>
+                    </div>
+
+                    <div class="converter-interface">
+                        <div class="converter-side">
+                            <input type="number" class="converter-input" id="converter-value-from" value="1" step="any">
+                            <select id="from-unit"></select>
+                        </div>
+                        <div class="converter-equals">
+                            <button class="swap-btn" id="swap-units" title="Swap units">
+                                <i class="fas fa-exchange-alt"></i>
+                            </button>
+                        </div>
+                        <div class="converter-side">
+                            <input type="text" class="converter-input" id="converter-value-to" readonly>
+                            <select id="to-unit"></select>
+                        </div>
+                    </div>
+                    <div class="conversion-formula-display" id="conversion-formula">1 meter = 3.28084 feet</div>
+                    <div class="conversion-history" id="conversion-history">
+                        <h4>Recent Conversions</h4>
+                        <ul id="conversion-history-list"></ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Settings Panel -->
+    <div class="settings-overlay" id="settings-overlay">
+        <div class="settings-panel">
+            <div class="settings-header">
+                <h2>Settings</h2>
+                <button class="close-settings" id="close-settings">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="settings-content">
+                <div class="setting-group">
+                    <h3>Display</h3>
+                    <div class="setting-option">
+                        <label for="decimal-places">Decimal Places</label>
+                        <select id="decimal-places">
+                            <option value="0">0 (Whole numbers)</option>
+                            <option value="2">2</option>
+                            <option value="4" selected>4</option>
+                            <option value="6">6</option>
+                            <option value="8">8</option>
+                            <option value="auto">Auto</option>
+                        </select>
+                    </div>
+                    <div class="setting-option">
+                        <label for="thousands-separator">Number Formatting</label>
+                        <select id="thousands-separator">
+                            <option value="," selected>1,000.00 (US)</option>
+                            <option value=".">1.000,00 (EU)</option>
+                            <option value=" ">1 000.00</option>
+                            <option value="none">1000.00</option>
+                        </select>
+                    </div>
+                    <div class="setting-option">
+                        <label for="font-size">Font Size</label>
+                        <select id="font-size">
+                            <option value="small">Small</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="large">Large</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="setting-group">
+                    <h3>Scientific Mode</h3>
+                    <div class="setting-option">
+                        <label for="angle-unit">Angle Unit</label>
+                        <select id="angle-unit">
+                            <option value="deg" selected>Degrees (DEG)</option>
+                            <option value="rad">Radians (RAD)</option>
+                            <option value="grad">Gradians (GRAD)</option>
+                        </select>
+                    </div>
+                    <div class="setting-option">
+                        <label for="sci-notation">Scientific Notation</label>
+                        <select id="sci-notation">
+                            <option value="auto">Auto</option>
+                            <option value="always">Always</option>
+                            <option value="never">Never</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="setting-group">
+                    <h3>Financial</h3>
+                    <div class="setting-option">
+                        <label for="currency-pref">Default Currency</label>
+                        <select id="currency-pref">
+                            <option value="USD" selected>US Dollar (USD)</option>
+                            <option value="EUR">Euro (EUR)</option>
+                            <option value="GBP">British Pound (GBP)</option>
+                            <option value="JPY">Japanese Yen (JPY)</option>
+                        </select>
+                    </div>
+                    <div class="setting-option">
+                        <label for="tax-rate">Default Tax Rate (%)</label>
+                        <input type="number" id="tax-rate" value="0" min="0" max="100" step="0.1">
+                    </div>
+                </div>
+                <div class="setting-group">
+                    <h3>Other</h3>
+                    <div class="setting-option">
+                        <label for="haptic-feedback">Haptic Feedback</label>
+                        <input type="checkbox" id="haptic-feedback" checked>
+                    </div>
+                    <div class="setting-option">
+                        <label for="button-sounds">Button Sounds</label>
+                        <input type="checkbox" id="button-sounds">
+                    </div>
+                </div>
+                <button class="action-btn save-settings-btn" id="save-settings">Save & Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Amortization Table Modal -->
+    <div class="modal-overlay" id="amortization-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Amortization Schedule</h3>
+                <button class="close-modal" id="close-amortization">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="table-container">
+                    <table id="amortization-table">
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Payment</th>
+                                <th>Principal</th>
+                                <th>Interest</th>
+                                <th>Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="action-btn" id="export-amortization">Export as CSV</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Growth Chart Modal -->
+    <div class="modal-overlay" id="growth-modal">
+        <div class="modal-content wide-modal">
+            <div class="modal-header">
+                <h3>Investment Growth Chart</h3>
+                <button class="close-modal" id="close-growth">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <canvas id="growth-chart"></canvas>
+            </div>
+            <div class="modal-footer">
+                <button class="action-btn" id="export-growth">Export as Image</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
